@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a143485f694b4041a1763dfac93a139, type: 3}
   m_Name: Customer Manager Settings
   m_EditorClassIdentifier: 
-  minNewCustomerInterval: 5
-  maxNewCustomerInterval: 10
+  debug: 0
+  playOnStart: 1
+  minNewCustomerInterval: 2
+  maxNewCustomerInterval: 4

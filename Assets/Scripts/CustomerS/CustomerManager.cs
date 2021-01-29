@@ -16,7 +16,6 @@ public sealed class CustomerManager : Singleton<CustomerManager>
 
     [SerializeField] private CustomerSpot[] _spots;
     [SerializeField] private GameObject[] _customerPrefabs;
-    [SerializeField] private Transform[] _spawnPositions;
 
     [SerializeField] private CustomerManagerSettings _settings = null;
     
@@ -89,21 +88,6 @@ public sealed class CustomerManager : Singleton<CustomerManager>
         }
     }
 
-    private Transform GetRandomSpawnPosition
-    {
-        get
-        {
-            int max = _spawnPositions.Length;
-            if (max == 0)
-                return null;
-
-            var random = GameManager.Instance.Random;
-            int randomIndex = random.Next(0, max - 1);
-
-            return _spawnPositions[randomIndex];
-        }
-    }
-
     private Customer SpawnRandomCustomer()
     {
         int max = _availableCustomerTypes.Count;
@@ -122,7 +106,7 @@ public sealed class CustomerManager : Singleton<CustomerManager>
         _availableCustomerTypes.Remove(randomIndex);
         
         // Spawn object at a random position.
-        var obj = Instantiate(prefab, GetRandomSpawnPosition);
+        var obj = Instantiate(prefab);
         var customer = obj.GetComponent<Customer>();
 
         // Assign prefab index.
