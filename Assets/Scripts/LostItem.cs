@@ -55,7 +55,7 @@ public class LostItem : Multiton<LostItem>
     private void Start()
     {
         _newPosition = transform.position;
-        _camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+        _camera = MainCamera.Instance.GetComponent<Camera>();
     }
 
     private void Update()
