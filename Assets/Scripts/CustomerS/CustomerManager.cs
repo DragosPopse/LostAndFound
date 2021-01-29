@@ -87,7 +87,7 @@ public sealed class CustomerManager : Singleton<CustomerManager>
             int max = availableSpots.Count;
             var random = GameManager.Instance.Random;
 
-            int randomIndex = random.Next(0, max - 1);
+            int randomIndex = random.Next(0, max);
             return availableSpots[randomIndex];
         }
     }
@@ -101,7 +101,7 @@ public sealed class CustomerManager : Singleton<CustomerManager>
         var random = GameManager.Instance.Random;
 
         // Get a random available prefab index.
-        int randomIndex = random.Next(0, max - 1);
+        int randomIndex = random.Next(0, max);
         int prefabIndex = _availableCustomerTypes[randomIndex];
         var prefab = _customerPrefabs[prefabIndex];
 

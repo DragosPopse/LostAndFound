@@ -83,8 +83,8 @@ MonoBehaviour:
   - transform: {fileID: 1428828519437062474}
   _customerPrefabs:
   - {fileID: 2798854286249553405, guid: af3154528ce06384a973307ab57a8a1b, type: 3}
-  - {fileID: 398157094842584670, guid: bc8bdb73666a7cd4889892cf3b520bbe, type: 3}
-  - {fileID: 398157094842584670, guid: 50bae0dac1ac008419d2d8c567585b50, type: 3}
+  - {fileID: 2798854286249553405, guid: 7c57359268691924196517e94afa1c82, type: 3}
+  - {fileID: 2798854286249553405, guid: aa53771946d04de4fac2f062cd98a48d, type: 3}
   _settings: {fileID: 11400000, guid: 930e32defe5307b4bae66567a324613e, type: 2}
 --- !u!1 &1428828518996729762
 GameObject:

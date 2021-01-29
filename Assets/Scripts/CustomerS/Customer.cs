@@ -16,7 +16,8 @@ public sealed class Customer : Multiton<Customer>
     
     [NonSerialized] public int prefabIndex = 0;
 
-    [SerializeField] private CustomerSettings _settings;
+    [SerializeField] private CustomerSettings _settings = null;
+    [SerializeField] private SpriteRenderer _wantedItemRenderer = null;
 
     private CustomerManager.CustomerSpot _spot = null;
     private LostItem _wantedItem = null;
@@ -75,7 +76,7 @@ public sealed class Customer : Multiton<Customer>
         var wantedItems = CustomerManager.Instance.wantedItems;
 
         int max = items.Count;
-        if (max == 0)
+        if (max - wantedItems.Count == 0)
             yield break;
 
         LostItem item = null;
@@ -84,16 +85,25 @@ public sealed class Customer : Multiton<Customer>
         {
             // Pick random available spot.
             var random = GameManager.Instance.Random;
-            int randomIndex = random.Next(0, max - 1);
+            int randomIndex = random.Next(0, max);
             item = items[randomIndex];
         } while (wantedItems.Contains(item));
 
         wantedItems.Add(item);
         _wantedItem = item;
+
+        // ReSharper disable once LocalVariableHidesMember
+        var renderer = item.GetComponent<SpriteRenderer>();
+        _wantedItemRenderer.sprite = renderer.sprite;
+        _wantedItemRenderer.color = renderer.color;
+        _wantedItemRenderer.gameObject.SetActive(true);
     }
 
     private IEnumerator UpdateCustomer()
     {
+        while (true)
+            yield return null;
+
         yield break;
     }
 
@@ -101,6 +111,7 @@ public sealed class Customer : Multiton<Customer>
     {
         var wantedItems = CustomerManager.Instance.wantedItems;
         wantedItems.Remove(_wantedItem);
+        _wantedItemRenderer.gameObject.SetActive(false);
         yield break;
     }
 
