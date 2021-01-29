@@ -17,13 +17,16 @@ public sealed class Customer : Multiton<Customer>
     [NonSerialized] public int prefabIndex = 0;
 
     [SerializeField] private CustomerSettings _settings;
+
     private CustomerManager.CustomerSpot _spot = null;
+    private LostItem _wantedItem = null;
 
     private IEnumerator OnSpotUpdated()
     {
         yield return StartCoroutine(Move());
         yield return StartCoroutine(AskForMissingItem());
         yield return StartCoroutine(UpdateCustomer());
+        yield return StartCoroutine(OnMissingItemReceived());
         yield return StartCoroutine(Move(true));
         Destroy(gameObject);
     }
@@ -68,11 +71,36 @@ public sealed class Customer : Multiton<Customer>
 
     private IEnumerator AskForMissingItem()
     {
-        yield break;
+        var items = LostItem.Instances;
+        var wantedItems = CustomerManager.Instance.wantedItems;
+
+        int max = items.Count;
+        if (max == 0)
+            yield break;
+
+        LostItem item = null;
+
+        do
+        {
+            // Pick random available spot.
+            var random = GameManager.Instance.Random;
+            int randomIndex = random.Next(0, max - 1);
+            item = items[randomIndex];
+        } while (wantedItems.Contains(item));
+
+        wantedItems.Add(item);
+        _wantedItem = item;
     }
 
     private IEnumerator UpdateCustomer()
     {
+        yield break;
+    }
+
+    private IEnumerator OnMissingItemReceived()
+    {
+        var wantedItems = CustomerManager.Instance.wantedItems;
+        wantedItems.Remove(_wantedItem);
         yield break;
     }
 

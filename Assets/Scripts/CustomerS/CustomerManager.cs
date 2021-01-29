@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using utility;
 
@@ -13,6 +12,8 @@ public sealed class CustomerManager : Singleton<CustomerManager>
         public Transform transform = null;
         [NonSerialized] public Customer customer = null;
     }
+
+    [NonSerialized] public List<LostItem> wantedItems = new List<LostItem>(); 
 
     [SerializeField] private CustomerSpot[] _spots;
     [SerializeField] private GameObject[] _customerPrefabs;
