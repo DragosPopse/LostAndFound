@@ -151,13 +151,13 @@ public sealed class Customer : Multiton<Customer>
         StopAllCoroutines();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (!_waiting)
             return;
 
         LostItem item = collision.gameObject.GetComponent<LostItem>();
-        if (item == _wantedItem) 
+        if (!item.IsSelected && item == _wantedItem) 
             _waiting = false;
     }
 }
