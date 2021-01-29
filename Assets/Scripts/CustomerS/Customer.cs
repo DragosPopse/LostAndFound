@@ -10,14 +10,23 @@ public sealed class Customer : Multiton<Customer>
         set
         {
             _spot = value;
-            StartCoroutine(Move());
+            StartCoroutine(OnSpotUpdated());
         }
     }
-
+    
     [NonSerialized] public int prefabIndex = 0;
 
     [SerializeField] private CustomerSettings _settings;
     private CustomerManager.CustomerSpot _spot = null;
+
+    private IEnumerator OnSpotUpdated()
+    {
+        yield return StartCoroutine(Move());
+        yield return StartCoroutine(AskForMissingItem());
+        yield return StartCoroutine(UpdateCustomer());
+        yield return StartCoroutine(Move(true));
+        Destroy(gameObject);
+    }
 
     private IEnumerator Move(bool reversed = false)
     {
@@ -55,6 +64,22 @@ public sealed class Customer : Multiton<Customer>
             transform.position = clamped;
             yield return null;
         }
+    }
+
+    private IEnumerator AskForMissingItem()
+    {
+        yield break;
+    }
+
+    private IEnumerator UpdateCustomer()
+    {
+        yield break;
+    }
+
+    private void OnDestroy()
+    {
+        var manager = CustomerManager.Instance;
+        manager.OnCustomerDestroyed(prefabIndex);
     }
 
     protected override void OnDisable()

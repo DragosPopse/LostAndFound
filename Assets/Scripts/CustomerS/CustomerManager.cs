@@ -24,6 +24,9 @@ public sealed class CustomerManager : Singleton<CustomerManager>
 
     private readonly List<int> _availableCustomerTypes = new List<int>();
 
+    public void OnCustomerDestroyed(int index) => 
+        _availableCustomerTypes.Add(index);
+
     protected override void Awake()
     {
         base.Awake();
