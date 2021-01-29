@@ -45,6 +45,7 @@ public class LostItem : Multiton<LostItem>
 
     private Vector3 _mouseOffset;
     private Vector3 _newPosition;
+    private Vector3 _velocity;
     private bool _mouseDown = false;
 
     private static LostItem _currentSelect = null;
@@ -69,7 +70,7 @@ public class LostItem : Multiton<LostItem>
 
         Table.Instance.ConstraintMovement(this, IsMoving);
 
-        var lerp = Vector3.Lerp(transform.position, _newPosition, 0.05f);
+        var lerp = Vector3.Lerp(transform.position, _newPosition, 0.005f);
         transform.position = new Vector3(lerp.x, lerp.y, transform.position.z);
     }
 
