@@ -10,7 +10,7 @@ public sealed class Customer : Multiton<Customer>
         set
         {
             _spot = value;
-            OnSpotUpdated();
+            StartCoroutine(Move());
         }
     }
 
@@ -18,45 +18,42 @@ public sealed class Customer : Multiton<Customer>
 
     [SerializeField] private CustomerSettings _settings;
     private CustomerManager.CustomerSpot _spot = null;
-    private Coroutine _spotUpdatedCoroutine = null;
 
-    private void OnSpotUpdated()
+    private IEnumerator Move(bool reversed = false)
     {
-        if(_spotUpdatedCoroutine != null)
-            StopCoroutine(_spotUpdatedCoroutine);
-        _spotUpdatedCoroutine = StartCoroutine(_OnSpotUpdated());
+        var offset = new Vector3(0, _settings.verticalSpawnOffset, 0);
+        Vector3 start = _spot.transform.position + offset;
+        Vector3 stop = _spot.transform.position;
 
-        IEnumerator _OnSpotUpdated()
+        if (reversed)
         {
-            // Spawn at target position.
-            var offset = new Vector3(0, _settings.verticalSpawnOffset, 0);
-            transform.position = _spot.transform.position + offset;
+            var a = start;
+            start = stop;
+            stop = a;
+        }
 
-            float min = _settings.spawnMinDuration;
-            float max = _settings.spawnMaxDuration;
-            
-            var random = GameManager.Instance.Random;
+        float min = _settings.moveMinDuration;
+        float max = _settings.moveMaxDuration;
 
-            float t = (float) random.NextDouble();
-            float duration = Mathf.Lerp(min, max, t);
+        var random = GameManager.Instance.Random;
 
-            Vector3 start = transform.position;
-            Vector3 stop = _spot.transform.position;
+        float t = (float)random.NextDouble();
+        float duration = Mathf.Lerp(min, max, t);
 
-            // Move customer towards the target spot.
-            float remaining = duration;
-            while (remaining > 0)
-            {
-                remaining -= Time.deltaTime;
-                remaining = Mathf.Max(0, remaining);
+        // Move customer towards the target spot.
+        float remaining = duration;
+        while (remaining > 0)
+        {
+            remaining -= Time.deltaTime;
+            remaining = Mathf.Max(0, remaining);
 
-                float lerp = 1f - remaining / duration;
-                float eval = _settings.spawnCurve.Evaluate(lerp);
+            float lerp = 1f - remaining / duration;
+            float eval = _settings.moveCurve.Evaluate(lerp);
 
-                var clamped = Vector3.LerpUnclamped(start, stop, eval);
-                transform.position = clamped;
-                yield return null;
-            }
+            var clamped = Vector3.LerpUnclamped(start, stop, eval);
+
+            transform.position = clamped;
+            yield return null;
         }
     }
 
