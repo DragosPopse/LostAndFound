@@ -29,10 +29,10 @@ public class LostItemSorter : MonoBehaviour
     {
         //Debug.Log("Enter: " + _debugName + " " + collision.gameObject.GetComponent<LostItem>()._debugName);
 
-        GameObject item = collision.gameObject;
+        LostItem item = collision.gameObject.GetComponent<LostItem>();
 
 
-        if (_item.IsMoving)
+        if (_item.IsSelected || (_item.IsMoving && !item.IsMoving))
         {
             if (_objectsOnTop.Count == 0)
             {
@@ -41,8 +41,6 @@ public class LostItemSorter : MonoBehaviour
             }
             else if (item.transform.position.z == transform.position.z - 1)
             {
-                Debug.Log("item  " + item.transform.position.z);
-                Debug.Log("ba  " + (transform.position.z - 1));
                 item.transform.position += new Vector3(0, 0, 1);
                 transform.position -= new Vector3(0, 0, 1);
             }
@@ -50,7 +48,7 @@ public class LostItemSorter : MonoBehaviour
 
         if (item.transform.position.z < transform.position.z)
         {
-            _objectsOnTop.Add(item);
+            _objectsOnTop.Add(item.gameObject);
             _objectsOnTop.Sort((a, b) => (int)(b.transform.position.z - a.transform.position.z));
         }
     }
