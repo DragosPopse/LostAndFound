@@ -10,7 +10,15 @@ public class LostItem : MonoBehaviour
 
     private Camera _camera;
 
-
+    public bool IsMoving
+    {
+        get
+        {
+            var offset = _newPosition - transform.position;
+            var offset2 = new Vector2(offset.x, offset.y);
+            return offset2.magnitude > 0.01f;
+        }
+    }
 
     private Vector3 _mouseOffset;
     private Vector3 _newPosition;
@@ -74,7 +82,8 @@ public class LostItem : MonoBehaviour
 
         GameObject item = collision.gameObject;
 
-        if (_mouseDown)
+
+        if (IsMoving)
         {
             if (_objectsOnTop.Count == 0)
             {
