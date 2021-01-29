@@ -77,10 +77,10 @@ public sealed class Customer : Multiton<Customer>
         var items = LostItem.Instances;
         var wantedItems = CustomerManager.Instance.wantedItems;
 
-        int max = items.Count;
-        if (max - wantedItems.Count == 0)
-            yield break;
+        while (items.Count - wantedItems.Count == 0)
+            yield return null;
 
+        int max = items.Count;
         LostItem item = null;
 
         do
@@ -159,7 +159,5 @@ public sealed class Customer : Multiton<Customer>
         LostItem item = collision.gameObject.GetComponent<LostItem>();
         if (item == _wantedItem) 
             _waiting = false;
-
-        print("Found wanted item!");
     }
 }
