@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using utility;
 
-public class LostItem : MonoBehaviour
+public class LostItem : Multiton<LostItem>
 {
     [SerializeField]
     public string _debugName = "Lost Item";
