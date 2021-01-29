@@ -54,13 +54,14 @@ public class LostItem : Multiton<LostItem>
 
     private void Start()
     {
-        _newPosition = transform.position;
+        if (_newPosition == Vector3.zero) { _newPosition = transform.position; }
         Table.Instance.ConstraintMovement(this, true);
         _camera = MainCamera.Instance.GetComponent<Camera>();
     }
 
     private void Update()
     {
+        Debug.Log("pos: " + _newPosition);
         if (_mouseDown)
         {
             var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
