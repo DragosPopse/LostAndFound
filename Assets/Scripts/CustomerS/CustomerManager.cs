@@ -103,7 +103,7 @@ public sealed class CustomerManager : Singleton<CustomerManager>
 
         // Make index unavailable.
         // This makes sure that you don't have the same models in the scene.
-        _availableCustomerTypes.Remove(randomIndex);
+        _availableCustomerTypes.RemoveAt(randomIndex);
         
         // Spawn object at a random position.
         var obj = Instantiate(prefab);
