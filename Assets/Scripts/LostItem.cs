@@ -66,11 +66,17 @@ public class LostItem : Multiton<LostItem>
             var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
             _newPosition = new Vector3(mousePosition.x + _mouseOffset.x, mousePosition.y + _mouseOffset.y, transform.position.z);
 
+            _velocity = Vector3.zero;
         }
 
-        Table.Instance.ConstraintMovement(this, IsMoving);
+        Table.Instance.ConstraintMovement(this, true);
 
-        var lerp = Vector3.Lerp(transform.position, _newPosition, 0.005f);
+        var lerp = Vector3.Lerp(transform.position, _newPosition, 0.05f);
+        if (!_mouseDown)
+        {
+           // if (_velocity == Vector3.zero)
+               // _newPosition = (lerp - transform.position) * 3;
+        }
         transform.position = new Vector3(lerp.x, lerp.y, transform.position.z);
     }
 
@@ -88,6 +94,6 @@ public class LostItem : Multiton<LostItem>
     {
         _mouseDown = false;
         _currentSelect = null;
- 
+        _newPosition += (Vector3.Lerp(transform.position, _newPosition, 0.05f) - transform.position) * 15;
     }
 }
