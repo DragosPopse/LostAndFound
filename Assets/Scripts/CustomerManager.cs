@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using utility;
 
@@ -15,15 +16,28 @@ public sealed class CustomerManager : Singleton<CustomerManager>
 
     [SerializeField] private CustomerSpot[] _spots;
     [SerializeField] private GameObject[] _customerPrefabs;
+    [SerializeField] private Transform[] _spawnPositions;
 
     [SerializeField] private CustomerManagerSettings _settings = null;
     
     // Once customer is placed, give an assignment.
     // Customer states: entering, waiting, correct/wrong item, leaving.
 
+    private readonly List<int> _availableCustomerTypes = new List<int>();
+
+    protected override void Awake()
+    {
+        base.Awake();
+
+        // Add all the available indexes.
+        for (int i = 0; i < _customerPrefabs.Length; i++) 
+            _availableCustomerTypes.Add(i);
+    }
+
     private void Start()
     {
-        Restart();
+        if(_settings.playOnStart)
+            Restart();
     }
 
     #region Externally called
@@ -75,19 +89,48 @@ public sealed class CustomerManager : Singleton<CustomerManager>
         }
     }
 
-    Customer SpawnRandomCustomer()
+    private Transform GetRandomSpawnPosition
     {
-        int max = _customerPrefabs.Length;
-        var random = GameManager.Instance.Random;
+        get
+        {
+            int max = _spawnPositions.Length;
+            if (max == 0)
+                return null;
 
-        int randomIndex = random.Next(0, max - 1);
-        var prefab = _customerPrefabs[randomIndex];
-        
-        var obj = Instantiate(prefab);
-        return obj.GetComponent<Customer>();
+            var random = GameManager.Instance.Random;
+            int randomIndex = random.Next(0, max - 1);
+
+            return _spawnPositions[randomIndex];
+        }
     }
 
-    IEnumerator TryAddCustomers()
+    private Customer SpawnRandomCustomer()
+    {
+        int max = _availableCustomerTypes.Count;
+        if (max == 0)
+            return null;
+
+        var random = GameManager.Instance.Random;
+
+        // Get a random available prefab index.
+        int randomIndex = random.Next(0, max - 1);
+        int prefabIndex = _availableCustomerTypes[randomIndex];
+        var prefab = _customerPrefabs[prefabIndex];
+
+        // Make index unavailable.
+        // This makes sure that you don't have the same models in the scene.
+        _availableCustomerTypes.Remove(randomIndex);
+        
+        // Spawn object at a random position.
+        var obj = Instantiate(prefab, GetRandomSpawnPosition);
+        var customer = obj.GetComponent<Customer>();
+
+        // Assign prefab index.
+        customer.prefabIndex = prefabIndex;
+        return customer;
+    }
+
+    private IEnumerator TryAddCustomers()
     {
         float min = _settings.minNewCustomerInterval;
         float max = _settings.maxNewCustomerInterval;

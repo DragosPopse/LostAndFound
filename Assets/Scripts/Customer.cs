@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using utility;
@@ -13,6 +14,9 @@ public sealed class Customer : Multiton<Customer>
         }
     }
 
+    [NonSerialized] public int prefabIndex = 0;
+
+    [SerializeField] private CustomerSettings _settings;
     private CustomerManager.CustomerSpot _spot = null;
     private Coroutine _spotUpdatedCoroutine = null;
 
