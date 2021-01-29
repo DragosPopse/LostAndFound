@@ -57,8 +57,6 @@ public sealed class Customer : Multiton<Customer>
                 transform.position = clamped;
                 yield return null;
             }
-
-            yield break;
         }
     }
 
