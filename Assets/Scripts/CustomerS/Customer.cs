@@ -22,6 +22,8 @@ public sealed class Customer : Multiton<Customer>
     private CustomerManager.CustomerSpot _spot = null;
     private LostItem _wantedItem = null;
 
+    private bool _waiting = false;
+
     private IEnumerator OnSpotUpdated()
     {
         yield return StartCoroutine(Move());
@@ -101,10 +103,9 @@ public sealed class Customer : Multiton<Customer>
 
     private IEnumerator UpdateCustomer()
     {
+        _waiting = true;
         while (true)
             yield return null;
-
-        yield break;
     }
 
     private IEnumerator OnMissingItemReceived()
@@ -125,5 +126,16 @@ public sealed class Customer : Multiton<Customer>
     {
         base.OnDisable();
         StopAllCoroutines();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (!_waiting)
+            return;
+
+        LostItem item = collision.gameObject.GetComponent<LostItem>();
+        if (item == _wantedItem)
+            _waiting = false;
+        print("Found wanted item!");
     }
 }
