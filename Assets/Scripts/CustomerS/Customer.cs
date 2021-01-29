@@ -104,7 +104,7 @@ public sealed class Customer : Multiton<Customer>
     private IEnumerator UpdateCustomer()
     {
         _waiting = true;
-        while (true)
+        while (_waiting)
             yield return null;
     }
 
@@ -113,7 +113,30 @@ public sealed class Customer : Multiton<Customer>
         var wantedItems = CustomerManager.Instance.wantedItems;
         wantedItems.Remove(_wantedItem);
         _wantedItemRenderer.gameObject.SetActive(false);
-        yield break;
+
+        _wantedItem.enabled = false;
+        _wantedItem.transform.SetParent(transform);
+
+        float remaining = _settings.itemGrabDuration;
+
+        var trans = _wantedItem.transform;
+        Vector3 start = trans.localPosition;
+        Vector3 end = Vector3.zero;
+
+        while (remaining > 0)
+        {
+            remaining -= Time.deltaTime;
+            remaining = Mathf.Max(0, remaining);
+            
+            float lerp = 1f - remaining / _settings.itemGrabDuration;
+            float eval = _settings.grabCurve.Evaluate(lerp);
+
+            var pos = Vector3.LerpUnclamped(start, end, eval);
+            trans.localPosition = pos;
+
+            trans.localScale = Vector3.one * _settings.shrinkCurve.Evaluate(lerp);
+            yield return null;
+        }
     }
 
     private void OnDestroy()
@@ -134,8 +157,9 @@ public sealed class Customer : Multiton<Customer>
             return;
 
         LostItem item = collision.gameObject.GetComponent<LostItem>();
-        if (item == _wantedItem)
+        if (item == _wantedItem) 
             _waiting = false;
+
         print("Found wanted item!");
     }
 }

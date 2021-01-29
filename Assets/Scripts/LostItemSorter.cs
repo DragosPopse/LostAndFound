@@ -30,7 +30,8 @@ public class LostItemSorter : MonoBehaviour
         //Debug.Log("Enter: " + _debugName + " " + collision.gameObject.GetComponent<LostItem>()._debugName);
 
         LostItem item = collision.gameObject.GetComponent<LostItem>();
-
+        if (!item)
+            return;
 
         if (_item.IsSelected || (_item.IsMoving && !item.IsMoving))
         {
