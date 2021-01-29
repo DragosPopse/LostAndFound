@@ -21,9 +21,33 @@ public class LostItem : Multiton<LostItem>
         }
     }
 
+
+    public bool IsSelected
+    {
+        get => _mouseDown;
+    }
+
+
+    public LostItem CurrentSelect
+    {
+        get => _currentSelect;
+    }
+
+
+    public Vector3 NewPosition
+    {
+        get => _newPosition;
+        set
+        {
+            _newPosition = value;
+        }
+    }
+
     private Vector3 _mouseOffset;
     private Vector3 _newPosition;
     private bool _mouseDown = false;
+
+    private static LostItem _currentSelect = null;
 
 
     private List<GameObject> _objectsOnTop = new List<GameObject>();
@@ -47,18 +71,12 @@ public class LostItem : Multiton<LostItem>
                     Debug.Log(obj.GetComponent<LostItem>()._debugName);
                 }
             }
-
-            /*
-            if (_objectsOnTop.Count > 0 && _objectsOnTop[0].transform.position.z != transform.position.z + 1)
-            {
-                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
-                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
-            }
-            */
         }
+
+        Table.Instance.ConstraintMovement(this);
+
         var lerp = Vector3.Lerp(transform.position, _newPosition, 0.05f);
         transform.position = new Vector3(lerp.x, lerp.y, transform.position.z);
-
     }
 
 
@@ -68,11 +86,13 @@ public class LostItem : Multiton<LostItem>
         _mouseDown = true;
         var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
         _mouseOffset = transform.position - mousePosition;
+        _currentSelect = this;
     }
 
     private void OnMouseUp()
     {
         _mouseDown = false;
+        _currentSelect = null;
  
     }
 
