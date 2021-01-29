@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using utility;
 
@@ -14,6 +13,8 @@ public sealed class CustomerManager : Singleton<CustomerManager>
         [NonSerialized] public Customer customer = null;
     }
 
+    [NonSerialized] public List<LostItem> wantedItems = new List<LostItem>(); 
+
     [SerializeField] private CustomerSpot[] _spots;
     [SerializeField] private GameObject[] _customerPrefabs;
 
@@ -23,6 +24,9 @@ public sealed class CustomerManager : Singleton<CustomerManager>
     // Customer states: entering, waiting, correct/wrong item, leaving.
 
     private readonly List<int> _availableCustomerTypes = new List<int>();
+
+    public void OnCustomerDestroyed(int index) => 
+        _availableCustomerTypes.Add(index);
 
     protected override void Awake()
     {

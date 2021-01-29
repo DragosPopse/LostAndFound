@@ -10,54 +10,104 @@ public sealed class Customer : Multiton<Customer>
         set
         {
             _spot = value;
-            OnSpotUpdated();
+            StartCoroutine(OnSpotUpdated());
         }
     }
-
+    
     [NonSerialized] public int prefabIndex = 0;
 
     [SerializeField] private CustomerSettings _settings;
+
     private CustomerManager.CustomerSpot _spot = null;
-    private Coroutine _spotUpdatedCoroutine = null;
+    private LostItem _wantedItem = null;
 
-    private void OnSpotUpdated()
+    private IEnumerator OnSpotUpdated()
     {
-        if(_spotUpdatedCoroutine != null)
-            StopCoroutine(_spotUpdatedCoroutine);
-        _spotUpdatedCoroutine = StartCoroutine(_OnSpotUpdated());
+        yield return StartCoroutine(Move());
+        yield return StartCoroutine(AskForMissingItem());
+        yield return StartCoroutine(UpdateCustomer());
+        yield return StartCoroutine(OnMissingItemReceived());
+        yield return StartCoroutine(Move(true));
+        Destroy(gameObject);
+    }
 
-        IEnumerator _OnSpotUpdated()
+    private IEnumerator Move(bool reversed = false)
+    {
+        var offset = new Vector3(0, _settings.verticalSpawnOffset, 0);
+        Vector3 start = _spot.transform.position + offset;
+        Vector3 stop = _spot.transform.position;
+
+        if (reversed)
         {
-            // Spawn at target position.
-            var offset = new Vector3(0, _settings.verticalSpawnOffset, 0);
-            transform.position = _spot.transform.position + offset;
-
-            float min = _settings.spawnMinDuration;
-            float max = _settings.spawnMaxDuration;
-            
-            var random = GameManager.Instance.Random;
-
-            float t = (float) random.NextDouble();
-            float duration = Mathf.Lerp(min, max, t);
-
-            Vector3 start = transform.position;
-            Vector3 stop = _spot.transform.position;
-
-            // Move customer towards the target spot.
-            float remaining = duration;
-            while (remaining > 0)
-            {
-                remaining -= Time.deltaTime;
-                remaining = Mathf.Max(0, remaining);
-
-                float lerp = 1f - remaining / duration;
-                float eval = _settings.spawnCurve.Evaluate(lerp);
-
-                var clamped = Vector3.LerpUnclamped(start, stop, eval);
-                transform.position = clamped;
-                yield return null;
-            }
+            var a = start;
+            start = stop;
+            stop = a;
         }
+
+        float min = _settings.moveMinDuration;
+        float max = _settings.moveMaxDuration;
+
+        var random = GameManager.Instance.Random;
+
+        float t = (float)random.NextDouble();
+        float duration = Mathf.Lerp(min, max, t);
+
+        // Move customer towards the target spot.
+        float remaining = duration;
+        while (remaining > 0)
+        {
+            remaining -= Time.deltaTime;
+            remaining = Mathf.Max(0, remaining);
+
+            float lerp = 1f - remaining / duration;
+            float eval = _settings.moveCurve.Evaluate(lerp);
+
+            var clamped = Vector3.LerpUnclamped(start, stop, eval);
+
+            transform.position = clamped;
+            yield return null;
+        }
+    }
+
+    private IEnumerator AskForMissingItem()
+    {
+        var items = LostItem.Instances;
+        var wantedItems = CustomerManager.Instance.wantedItems;
+
+        int max = items.Count;
+        if (max == 0)
+            yield break;
+
+        LostItem item = null;
+
+        do
+        {
+            // Pick random available spot.
+            var random = GameManager.Instance.Random;
+            int randomIndex = random.Next(0, max - 1);
+            item = items[randomIndex];
+        } while (wantedItems.Contains(item));
+
+        wantedItems.Add(item);
+        _wantedItem = item;
+    }
+
+    private IEnumerator UpdateCustomer()
+    {
+        yield break;
+    }
+
+    private IEnumerator OnMissingItemReceived()
+    {
+        var wantedItems = CustomerManager.Instance.wantedItems;
+        wantedItems.Remove(_wantedItem);
+        yield break;
+    }
+
+    private void OnDestroy()
+    {
+        var manager = CustomerManager.Instance;
+        manager.OnCustomerDestroyed(prefabIndex);
     }
 
     protected override void OnDisable()

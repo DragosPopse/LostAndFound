@@ -13,23 +13,23 @@ MonoBehaviour:
   m_Name: Customer Settings
   m_EditorClassIdentifier: 
   verticalSpawnOffset: -1
-  spawnCurve:
+  moveCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.7110152
-      value: 1.0375992
-      inSlope: 0.80565786
-      outSlope: 0.80565786
+      time: 0.91308725
+      value: 1.0852067
+      inSlope: 0.21378756
+      outSlope: 0.21378756
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
@@ -46,5 +46,5 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  spawnMinDuration: 0.5
-  spawnMaxDuration: 1
+  moveMinDuration: 0.25
+  moveMaxDuration: 0.75

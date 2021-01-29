@@ -4,6 +4,6 @@ using UnityEngine;
 public sealed class CustomerSettings : ScriptableObject
 {
     public float verticalSpawnOffset = -1;
-    public AnimationCurve spawnCurve = null;
-    public float spawnMinDuration = 1, spawnMaxDuration = 2;
+    public AnimationCurve moveCurve = null;
+    public float moveMinDuration = .5f, moveMaxDuration = 1;
 }
