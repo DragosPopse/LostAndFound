@@ -104,7 +104,7 @@ public sealed class Customer : Multiton<Customer>
     private IEnumerator UpdateCustomer()
     {
         _waiting = true;
-        while (true)
+        while (_waiting)
             yield return null;
     }
 
