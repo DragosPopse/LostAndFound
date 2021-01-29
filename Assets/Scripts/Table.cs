@@ -15,15 +15,16 @@ public class Table : utility.Singleton<Table>
     private BoxCollider2D _collider;
 
 
-    private void Start()
+    protected override void Awake()
     {
+        base.Awake();
         _collider = GetComponent<BoxCollider2D>();
     }
 
 
-    public void ConstraintMovement(LostItem item)
+    public void ConstraintMovement(LostItem item, bool condition)
     {
-        if (item.IsMoving)
+        if (condition)
         {
             var itemBounds = item.GetComponent<BoxCollider2D>().bounds;
             var itemNewPosition = item.NewPosition;

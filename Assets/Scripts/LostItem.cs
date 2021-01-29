@@ -55,6 +55,7 @@ public class LostItem : Multiton<LostItem>
     private void Start()
     {
         _newPosition = transform.position;
+        Table.Instance.ConstraintMovement(this, true);
         _camera = MainCamera.Instance.GetComponent<Camera>();
     }
 
@@ -73,7 +74,7 @@ public class LostItem : Multiton<LostItem>
             }
         }
 
-        Table.Instance.ConstraintMovement(this);
+        Table.Instance.ConstraintMovement(this, IsMoving);
 
         var lerp = Vector3.Lerp(transform.position, _newPosition, 0.05f);
         transform.position = new Vector3(lerp.x, lerp.y, transform.position.z);
