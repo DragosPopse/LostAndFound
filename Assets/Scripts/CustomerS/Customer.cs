@@ -23,10 +23,10 @@ public sealed class Customer : Multiton<Customer>
     private SpriteRenderer _renderer = null;
 
     private CustomerManager.CustomerSpot _spot = null;
-    private LostItem _wantedItem = null;
+    private LostItem _wantedItem = null, _stealItem = null;
 
     private bool _waiting = false;
-    private bool _foundItem = false;
+    private LostItem _foundItem = null;
 
     private void Awake()
     {
@@ -114,21 +114,48 @@ public sealed class Customer : Multiton<Customer>
     private IEnumerator UpdateCustomer()
     {
         _waiting = true;
-        _foundItem = false;
+        _foundItem = null;
 
         float min = _settings.minWaitDuration;
         float max = _settings.maxWaitDuration;
 
         var random = GameManager.Instance.Random;
 
+        // Calculate maximum wait duration.
         float t = (float)random.NextDouble();
         float duration = Mathf.Lerp(min, max, t);
         float remaining = duration;
 
-        while ((remaining -= Time.deltaTime) > 0 && !_foundItem)
+        // Calculate whether or not the character is trying to steal something.
+        bool stealing = _settings.stealChance > random.NextDouble();
+        var potentialStealTargets = LostItem.Instances;
+        int stealIndex = random.Next(0, potentialStealTargets.Count);
+        float stealInterval = _settings.stealInterval;
+
+        _stealItem = null;
+        if (stealing)
+            _stealItem = potentialStealTargets[stealIndex];
+
+        while (((remaining -= Time.deltaTime) > 0 || stealing) && !_foundItem)
         {
             float lerp = 1f - remaining / duration;
             float eval = _settings.angryColorCurve.Evaluate(lerp);
+
+            // Update stealing.
+            if (stealing)
+            {
+                stealInterval -= Time.deltaTime;
+                if (stealInterval <= 0)
+                    if (_stealItem)
+                    {
+                        if (_stealItem.IsSelected)
+                            stealInterval = _settings.stealInterval;
+                        else
+                            _stealItem.NewPosition = transform.position;
+                    }
+                    else
+                        stealing = false;
+            }
 
             // Update color based on how long the customer is waiting.
             // The customer gets redder (angry) the longer it waits.
@@ -148,12 +175,12 @@ public sealed class Customer : Multiton<Customer>
         if (!_foundItem)
             yield break;
 
-        _wantedItem.enabled = false;
-        _wantedItem.transform.SetParent(transform);
+        _foundItem.enabled = false;
+        _foundItem.transform.SetParent(transform);
 
         float remaining = _settings.itemGrabDuration;
 
-        var trans = _wantedItem.transform;
+        var trans = _foundItem.transform;
         Vector3 start = trans.localPosition;
         Vector3 end = Vector3.zero;
 
@@ -191,7 +218,10 @@ public sealed class Customer : Multiton<Customer>
             return;
 
         LostItem item = collision.gameObject.GetComponent<LostItem>();
-        if (!item.IsSelected && item == _wantedItem) 
-            _foundItem = true;
+        if (!item)
+            return;
+
+        if (!item.IsSelected && (item == _wantedItem || item == _stealItem)) 
+            _foundItem = item;
     }
 }
