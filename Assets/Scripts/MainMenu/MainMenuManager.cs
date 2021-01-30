@@ -14,6 +14,6 @@ public class MainMenuManager : utility.Singleton<MainMenuManager>
 
     public void ButtonDown_OpenCounter()
     {
-
+        _fence.PlayLiftAnimation();
     }
 }
