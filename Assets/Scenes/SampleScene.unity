@@ -682,6 +682,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1428828518578334457, guid: 6565c0c693987364cb5b5d505dfd1a53, type: 3}
+      propertyPath: _customerPrefabs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1428828518578334457, guid: 6565c0c693987364cb5b5d505dfd1a53, type: 3}
+      propertyPath: _customerPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1428828518578334457, guid: 6565c0c693987364cb5b5d505dfd1a53, type: 3}
+      propertyPath: _customerPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1428828519477625025, guid: 6565c0c693987364cb5b5d505dfd1a53, type: 3}
       propertyPath: m_Name
       value: '[Managers]'

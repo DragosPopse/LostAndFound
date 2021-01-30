@@ -189,6 +189,8 @@ public sealed class Customer : Multiton<Customer>
         Vector3 start = trans.localPosition;
         Vector3 end = Vector3.zero;
 
+        var startScale = trans.localScale;
+
         while (remaining > 0)
         {
             remaining -= Time.deltaTime;
@@ -200,7 +202,7 @@ public sealed class Customer : Multiton<Customer>
             var pos = Vector3.LerpUnclamped(start, end, eval);
             trans.localPosition = pos;
 
-            trans.localScale = Vector3.one * _settings.shrinkCurve.Evaluate(lerp);
+            trans.localScale = startScale * _settings.shrinkCurve.Evaluate(lerp);
             yield return null;
         }
     }
