@@ -194,6 +194,9 @@ public sealed class Customer : Multiton<Customer>
 
     private IEnumerator OnMissingItemReceived()
     {
+        var wanted = CustomerManager.Instance.wantedItems;
+        wanted.Remove(_wantedItem);
+
         _wantedItemRenderer.gameObject.SetActive(false);
         if (!_foundItem)
         {
@@ -271,7 +274,6 @@ public sealed class Customer : Multiton<Customer>
 
         _foundItem = item;
         wanted.Remove(_wantedItem);
-        wanted.Remove(_foundItem);
     }
 
     private void OnCollisionExit2D(Collision2D collision)
