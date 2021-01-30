@@ -132,9 +132,11 @@ public sealed class Customer : Multiton<Customer>
         int stealIndex = random.Next(0, potentialStealTargets.Count);
         float stealInterval = _settings.stealInterval;
 
-        _stealItem = null;
-        if (stealing)
-            _stealItem = potentialStealTargets[stealIndex];
+        // Check if the stealing item is the same as the wanted item.
+        if (potentialStealTargets.Count > 0)
+            _stealItem = stealing ? potentialStealTargets[stealIndex] : null;
+        else
+            _stealItem = null;
 
         while (((remaining -= Time.deltaTime) > 0 || stealing) && !_foundItem)
         {
@@ -171,9 +173,12 @@ public sealed class Customer : Multiton<Customer>
     {
         var wantedItems = CustomerManager.Instance.wantedItems;
         wantedItems.Remove(_wantedItem);
+
         _wantedItemRenderer.gameObject.SetActive(false);
         if (!_foundItem)
             yield break;
+        
+        wantedItems.Remove(_foundItem);
 
         _foundItem.enabled = false;
         _foundItem.transform.SetParent(transform);
