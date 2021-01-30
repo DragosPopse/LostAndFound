@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43dba8d038be1d449b840ab42366fb57, type: 3}
   m_Name: Customer Settings
   m_EditorClassIdentifier: 
-  verticalSpawnOffset: -1
+  verticalSpawnOffset: -4
   moveCurve:
     serializedVersion: 2
     m_Curve:
@@ -46,8 +46,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  moveMinDuration: 0.25
-  moveMaxDuration: 0.75
+  moveMinDuration: 0.5
+  moveMaxDuration: 1.5
   itemGrabDuration: 0.5
   grabCurve:
     serializedVersion: 2
@@ -97,6 +97,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  grabVerticalOffset: 1
   minWaitDuration: 5
   maxWaitDuration: 10
   angryColor: {r: 1, g: 0, b: 0, a: 1}

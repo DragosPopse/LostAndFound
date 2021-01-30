@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 76ef7db6845bb2a419e01bf299ee5cfd
+guid: 2fac6e499020cd54a8032cbb92e60647
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5070485509752081005
-    second: bruh2_0
+      213: -9128501274826510683
+    second: bruh3_0
   - first:
-      213: 6764937656709068459
-    second: bruh2_1
+      213: 156080045469496975
+    second: bruh3_1
   - first:
-      213: -4084803468244636378
-    second: bruh2_2
+      213: 2450723695873335227
+    second: bruh3_2
   - first:
-      213: -5083475933324827721
-    second: bruh2_3
+      213: -4706083426735116117
+    second: bruh3_3
   - first:
-      213: 7648468884813365257
-    second: bruh2_4
+      213: 3878618018002631703
+    second: bruh3_4
   - first:
-      213: -5231418273229872259
-    second: bruh2_5
+      213: -1969296927823876177
+    second: bruh3_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -109,7 +109,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bruh2_0
+      name: bruh3_0
       rect:
         serializedVersion: 2
         x: 0
@@ -123,14 +123,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6ac98fd4bbfd5640800000000000000
-      internalID: 5070485509752081005
+      spriteID: 5aee346947c015180800000000000000
+      internalID: -9128501274826510683
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bruh2_1
+      name: bruh3_1
       rect:
         serializedVersion: 2
         x: 166
@@ -144,14 +144,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ba6bec3e4f2e1ed50800000000000000
-      internalID: 6764937656709068459
+      spriteID: f867cb279f18a2200800000000000000
+      internalID: 156080045469496975
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bruh2_2
+      name: bruh3_2
       rect:
         serializedVersion: 2
         x: 333
@@ -165,14 +165,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62daef943ecdf47c0800000000000000
-      internalID: -4084803468244636378
+      spriteID: bbf99278738b20220800000000000000
+      internalID: 2450723695873335227
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bruh2_3
+      name: bruh3_3
       rect:
         serializedVersion: 2
         x: 0
@@ -186,14 +186,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b32de1729dd379b0800000000000000
-      internalID: -5083475933324827721
+      spriteID: ba0b91aae02a0beb0800000000000000
+      internalID: -4706083426735116117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bruh2_4
+      name: bruh3_4
       rect:
         serializedVersion: 2
         x: 166
@@ -207,14 +207,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 900cdea6de1d42a60800000000000000
-      internalID: 7648468884813365257
+      spriteID: 71cf97e998e93d530800000000000000
+      internalID: 3878618018002631703
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bruh2_5
+      name: bruh3_5
       rect:
         serializedVersion: 2
         x: 332
@@ -228,8 +228,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7365a83cc44667b0800000000000000
-      internalID: -5231418273229872259
+      spriteID: faf2acfb0e6aba4e0800000000000000
+      internalID: -1969296927823876177
       vertices: []
       indices: 
       edges: []
