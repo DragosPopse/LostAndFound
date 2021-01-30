@@ -149,8 +149,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 23362370}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -960.53, y: -185.39, z: 10.71}
-  m_LocalScale: {x: 2.61, y: 1.36, z: 1}
+  m_LocalPosition: {x: -959.5, y: -185.6, z: 10.71}
+  m_LocalScale: {x: 1.734606, y: 0.90385604, z: 0.6646}
   m_Children: []
   m_Father: {fileID: 1961241193}
   m_RootOrder: 0
@@ -192,8 +192,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _scaleAnimationDuration: 1
-  _shakeMagnitude: {x: 1, y: 3}
-  _shakeDuration: 0.5
+  _shakeMagnitude: {x: 0.2, y: 0.2}
+  _shakeDuration: 0.1
+  _waitDuration: 0.35
 --- !u!212 &23362373
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -234,12 +235,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0e73203e0ea67424a95e5dbc68943f7b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 57ce5b855b865ca488ec890218cbc7e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 9.2, y: 7.55}
+  m_Size: {x: 20, y: 10}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -558,8 +559,9 @@ GameObject:
   - component: {fileID: 753107792}
   - component: {fileID: 753107794}
   - component: {fileID: 753107793}
+  - component: {fileID: 753107795}
   m_Layer: 5
-  m_Name: Text
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -626,6 +628,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 753107791}
   m_CullTransparentMesh: 1
+--- !u!114 &753107795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753107791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8577be01a9cf940a084ff091419dfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.31753376
+      outSlope: 0.31753376
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.17083333
+      value: 1.0542454
+      inSlope: -0.47696674
+      outSlope: -0.47696674
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.9999898
+      value: 0.000000070780516
+      inSlope: -1.2714672
+      outSlope: -1.2714672
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _duration: 0.5
 --- !u!1 &1164297758
 GameObject:
   m_ObjectHideFlags: 0
