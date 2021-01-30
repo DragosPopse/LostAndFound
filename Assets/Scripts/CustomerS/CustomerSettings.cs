@@ -22,4 +22,5 @@ public sealed class CustomerSettings : ScriptableObject
     // Stealing.
     [Range(0, 1)] public float stealChance = .1f;
     public float stealInterval = 2;
+    public float stealLerp = .01f;
 }

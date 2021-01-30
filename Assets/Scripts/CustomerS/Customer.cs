@@ -161,7 +161,7 @@ public sealed class Customer : Multiton<Customer>
             float eval = _settings.angryColorCurve.Evaluate(lerp);
 
             // Update stealing.
-            if (stealing)
+            if (remaining < 0)
             {
                 stealInterval -= Time.deltaTime;
                 if (stealInterval <= 0)
@@ -170,10 +170,16 @@ public sealed class Customer : Multiton<Customer>
                         if (_stealItem.IsSelected)
                             stealInterval = _settings.stealInterval;
                         else
+                        {
+                            _stealItem.LerpFactor = _settings.stealLerp;
                             _stealItem.NewPosition = transform.position;
+                        }
                     }
                     else
+                    {
                         stealing = false;
+                        _stealItem = null;
+                    }
             }
 
             // Update color based on how long the customer is waiting.
@@ -188,12 +194,15 @@ public sealed class Customer : Multiton<Customer>
 
     private IEnumerator OnMissingItemReceived()
     {
-        _renderer.sprite = _foundSprite;
-        
         _wantedItemRenderer.gameObject.SetActive(false);
         if (!_foundItem)
+        {
+            _renderer.sprite = _angrySprite;
             yield break;
-        
+        }
+
+        _renderer.sprite = _foundSprite;
+
         _foundItem.enabled = false;
         _foundItem.transform.SetParent(transform);
 
