@@ -238,11 +238,12 @@ public sealed class Customer : Multiton<Customer>
     {
         if (!_waiting)
             return;
-        _animationLocked = true;
 
         LostItem item = collision.gameObject.GetComponent<LostItem>();
         if (!item)
             return;
+
+        _animationLocked = true;
 
         var wanted = CustomerManager.Instance.wantedItems;
         if (!wanted.Contains(item))
@@ -266,6 +267,10 @@ public sealed class Customer : Multiton<Customer>
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        LostItem item = collision.gameObject.GetComponent<LostItem>();
+        if (!item)
+            return;
+
         _animationLocked = false;
     }
 }
