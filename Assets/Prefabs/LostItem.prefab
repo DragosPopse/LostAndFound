@@ -125,6 +125,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _debugName: Blue
+  _lerpFactorSelected: 0.05
 --- !u!50 &1218470324
 Rigidbody2D:
   serializedVersion: 4

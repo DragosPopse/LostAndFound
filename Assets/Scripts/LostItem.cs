@@ -88,7 +88,7 @@ public class LostItem : Multiton<LostItem>
 
         Table.Instance.ConstraintMovement(this, true);
 
-        var lerp = Vector3.Lerp(transform.position, _newPosition, 0.05f);
+        var lerp = Vector3.Lerp(transform.position, _newPosition, _lerpFactor);
         if (!_mouseDown)
         {
            // if (_velocity == Vector3.zero)
