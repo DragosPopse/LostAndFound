@@ -19,6 +19,11 @@ public sealed class CustomerSettings : ScriptableObject
     public Color angryColor = Color.red;
     public AnimationCurve angryColorCurve = null;
 
+    // Bouncing
+    public float bounceDuration = .5f;
+    public float bounceMultiplier = 1;
+    public AnimationCurve bounceCurve = null;
+
     // Stealing.
     [Range(0, 1)] public float stealChance = .1f;
     public float stealInterval = 2;

@@ -35,7 +35,7 @@ public sealed class Customer : Multiton<Customer>
     private bool _waiting = false;
     private LostItem _foundItem = null;
 
-    private bool _animationLocked = false;
+    private int _animationLocked = 0;
 
     private void Awake()
     {
@@ -154,7 +154,7 @@ public sealed class Customer : Multiton<Customer>
         while (((remaining -= Time.deltaTime) > 0 || _stealItem) && !_foundItem)
         {
             // Update animation.
-            if(!_animationLocked)
+            if(_animationLocked == 0)
                 _renderer.sprite = _waitingSprite;
 
             float lerp = 1f - remaining / duration;
@@ -176,11 +176,15 @@ public sealed class Customer : Multiton<Customer>
                         }
                     }
                     else
-                    {
-                        stealing = false;
                         _stealItem = null;
-                    }
             }
+
+            // Calculate bounce.
+            var bounceMaxOffset = new Vector3(0, -_settings.bounceMultiplier, 0);
+            float bounceEval = _settings.bounceCurve.Evaluate((duration - remaining) % _settings.bounceDuration);
+            var bounceOffset = Vector3.LerpUnclamped(Vector3.zero, bounceMaxOffset, bounceEval);
+
+            transform.position = _spot.transform.position + bounceOffset;
 
             // Update color based on how long the customer is waiting.
             // The customer gets redder (angry) the longer it waits.
@@ -225,10 +229,13 @@ public sealed class Customer : Multiton<Customer>
             float lerp = 1f - remaining / _settings.itemGrabDuration;
             float eval = _settings.grabCurve.Evaluate(lerp);
 
+            // Calculate position.
             var pos = Vector3.LerpUnclamped(start, end, eval);
             trans.localPosition = pos;
 
+            // Calculate scale.
             trans.localScale = startScale * _settings.shrinkCurve.Evaluate(lerp);
+            
             yield return null;
         }
     }
@@ -236,6 +243,7 @@ public sealed class Customer : Multiton<Customer>
     private void OnDestroy()
     {
         var manager = CustomerManager.Instance;
+        _spot.customer = null;
         manager.OnCustomerDestroyed(prefabIndex);
     }
 
@@ -243,6 +251,14 @@ public sealed class Customer : Multiton<Customer>
     {
         base.OnDisable();
         StopAllCoroutines();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        LostItem item = collision.gameObject.GetComponent<LostItem>();
+        if (!item)
+            return;
+        _animationLocked++;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -253,8 +269,6 @@ public sealed class Customer : Multiton<Customer>
         LostItem item = collision.gameObject.GetComponent<LostItem>();
         if (!item)
             return;
-
-        _animationLocked = true;
 
         var wanted = CustomerManager.Instance.wantedItems;
         if (!wanted.Contains(item))
@@ -282,6 +296,6 @@ public sealed class Customer : Multiton<Customer>
         if (!item)
             return;
 
-        _animationLocked = false;
+        _animationLocked--;
     }
 }
