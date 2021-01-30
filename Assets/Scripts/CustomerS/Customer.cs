@@ -20,6 +20,11 @@ public sealed class Customer : Multiton<Customer>
     [SerializeField] private CustomerSettings _settings = null;
     [SerializeField] private SpriteRenderer _wantedItemRenderer = null;
 
+    [SerializeField] private Sprite 
+        _defaultSprite = null, 
+        _waitingSprite = null, 
+        _foundSprite = null;
+
     private SpriteRenderer _renderer = null;
 
     private CustomerManager.CustomerSpot _spot = null;
@@ -36,6 +41,8 @@ public sealed class Customer : Multiton<Customer>
     private IEnumerator OnSpotUpdated()
     {
         _renderer.color = Color.white;
+        _renderer.sprite = _defaultSprite;
+
         yield return StartCoroutine(Move());
         yield return StartCoroutine(AskForMissingItem());
         yield return StartCoroutine(UpdateCustomer());
@@ -84,6 +91,8 @@ public sealed class Customer : Multiton<Customer>
 
     private IEnumerator AskForMissingItem()
     {
+        _renderer.sprite = _waitingSprite;
+
         var items = LostItem.Instances;
         var wantedItems = CustomerManager.Instance.wantedItems;
 
@@ -171,6 +180,8 @@ public sealed class Customer : Multiton<Customer>
 
     private IEnumerator OnMissingItemReceived()
     {
+        _renderer.sprite = _foundSprite;
+
         var wantedItems = CustomerManager.Instance.wantedItems;
         wantedItems.Remove(_wantedItem);
 
@@ -187,7 +198,7 @@ public sealed class Customer : Multiton<Customer>
 
         var trans = _foundItem.transform;
         Vector3 start = trans.localPosition;
-        Vector3 end = Vector3.zero;
+        Vector3 end = new Vector3(0, _settings.grabVerticalOffset, 0);
 
         var startScale = trans.localScale;
 
