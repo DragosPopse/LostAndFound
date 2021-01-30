@@ -9,6 +9,9 @@ public class LostItem : Multiton<LostItem>
     [SerializeField]
     public string _debugName = "Lost Item";
 
+    [SerializeField]
+    private float _lerpFactorSelected;
+
     private Camera _camera;
 
     public bool IsMoving
@@ -43,6 +46,16 @@ public class LostItem : Multiton<LostItem>
         }
     }
 
+
+    public float LerpFactor
+    {
+        get => _lerpFactor;
+        set
+        {
+            _lerpFactor = value;
+        }
+    }
+
     private Vector3 _mouseOffset;
     private Vector3 _newPosition;
     private Vector3 _velocity;
@@ -51,12 +64,16 @@ public class LostItem : Multiton<LostItem>
     private static LostItem _currentSelect = null;
 
 
+    private float _lerpFactor;
+
 
     private void Start()
     {
         if (_newPosition == Vector3.zero) { _newPosition = transform.position; }
         Table.Instance.ConstraintMovement(this, true);
         _camera = MainCamera.Instance.GetComponent<Camera>();
+
+        _lerpFactor = _lerpFactorSelected;
     }
 
     private void Update()
@@ -66,7 +83,6 @@ public class LostItem : Multiton<LostItem>
         {
             var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
             _newPosition = new Vector3(mousePosition.x + _mouseOffset.x, mousePosition.y + _mouseOffset.y, transform.position.z);
-
             _velocity = Vector3.zero;
         }
 
@@ -88,6 +104,8 @@ public class LostItem : Multiton<LostItem>
         _mouseDown = true;
         var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
         _mouseOffset = transform.position - mousePosition;
+        _lerpFactor = _lerpFactorSelected;
+
         _currentSelect = this;
     }
 
