@@ -1,41 +1,16 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!50 &819115818
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6540021179839624475}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!1001 &3750937034445241693
+--- !u!1001 &1680582207438989915
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1318713169333880008, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
-      propertyPath: _debugName
-      value: Green
-      objectReference: {fileID: 0}
     - target: {fileID: 4833099610987680865, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 642fcdb0bee78d74cb9a34e5c7ab1165, type: 3}
+      objectReference: {fileID: 21300000, guid: 475677d8d47e9114b86e0146d5ad1e1c, type: 3}
     - target: {fileID: 4833099610987680865, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -50,19 +25,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5299108156028844482, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
       propertyPath: m_Size.x
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5299108156028844482, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
       propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5299108156028844482, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5299108156028844482, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5299108156028844482, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
@@ -82,15 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6948388637361309191, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.527
+      value: 7.48
       objectReference: {fileID: 0}
     - target: {fileID: 6948388637361309191, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.01
+      value: -8.58
       objectReference: {fileID: 0}
     - target: {fileID: 6948388637361309191, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6948388637361309191, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -122,12 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7983989064349517894, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
       propertyPath: m_Name
-      value: LostItem (1) Variant
+      value: Katana
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
---- !u!1 &6540021179839624475 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7983989064349517894, guid: c4c41d9fb63845241bd74c2c7b49ef9a, type: 3}
-  m_PrefabInstance: {fileID: 3750937034445241693}
-  m_PrefabAsset: {fileID: 0}

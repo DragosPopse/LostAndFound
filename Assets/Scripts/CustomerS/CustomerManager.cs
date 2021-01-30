@@ -129,7 +129,7 @@ public sealed class CustomerManager : Singleton<CustomerManager>
         while (true)
         {
             // If there is no spot available, wait before starting the interval.
-            while (GetFreeSpotCount == 0)
+            while (GetFreeSpotCount == 0 || _availableCustomerTypes.Count == 0)
                 yield return null;
 
             // Calculate random interval.
