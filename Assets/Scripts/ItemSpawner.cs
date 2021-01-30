@@ -11,7 +11,7 @@ public class ItemSpawner : utility.Singleton<ItemSpawner>
     
     private void SpawnRandomItem()
     {
-        int index = Random.Range(0, _itemPrefabs.Length - 1);
+        int index = Random.Range(0, _itemPrefabs.Length);
         float targetX = Random.Range(-6, 6);
         float targetY = Random.Range(-1.75f, -4);
         Vector3 targetPosition = new Vector3(targetX, targetY, index);
