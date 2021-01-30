@@ -120,7 +120,7 @@ public sealed class Customer : Multiton<Customer>
         // ReSharper disable once LocalVariableHidesMember
         var renderer = item.GetComponent<SpriteRenderer>();
         _wantedItemRenderer.sprite = renderer.sprite;
-        _wantedItemRenderer.color = renderer.color;
+        _wantedItemRenderer.color = Color.black;
         _wantedItemRenderer.gameObject.SetActive(true);
     }
 
@@ -151,7 +151,7 @@ public sealed class Customer : Multiton<Customer>
         else
             _stealItem = null;
 
-        while (((remaining -= Time.deltaTime) > 0 || stealing) && !_foundItem)
+        while (((remaining -= Time.deltaTime) > 0 || _stealItem) && !_foundItem)
         {
             // Update animation.
             if(!_animationLocked)
