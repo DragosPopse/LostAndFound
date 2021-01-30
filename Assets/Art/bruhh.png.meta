@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 76ef7db6845bb2a419e01bf299ee5cfd
+guid: 94c6ce057a324dd4a983b53da9c21d9a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5070485509752081005
-    second: bruh2_0
+      213: -1245731840903284759
+    second: bruhh_0
   - first:
-      213: 6764937656709068459
-    second: bruh2_1
+      213: -3613693926175237357
+    second: bruhh_1
   - first:
-      213: -4084803468244636378
-    second: bruh2_2
+      213: 6399449434211894141
+    second: bruhh_2
   - first:
-      213: -5083475933324827721
-    second: bruh2_3
+      213: -2998740337517918942
+    second: bruhh_3
   - first:
-      213: 7648468884813365257
-    second: bruh2_4
+      213: -3666369031247001648
+    second: bruhh_4
   - first:
-      213: -5231418273229872259
-    second: bruh2_5
+      213: 7820243516287652596
+    second: bruhh_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -64,7 +64,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -109,13 +109,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bruh2_0
+      name: bruhh_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 250
-        width: 166.66667
-        height: 250
+        y: 500
+        width: 333.33334
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -123,41 +123,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6ac98fd4bbfd5640800000000000000
-      internalID: 5070485509752081005
+      spriteID: 9e7f099ad7546bee0800000000000000
+      internalID: -1245731840903284759
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bruh2_1
-      rect:
-        serializedVersion: 2
-        x: 166
-        y: 250
-        width: 166.66667
-        height: 250
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ba6bec3e4f2e1ed50800000000000000
-      internalID: 6764937656709068459
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bruh2_2
+      name: bruhh_1
       rect:
         serializedVersion: 2
         x: 333
-        y: 250
-        width: 167
-        height: 250
+        y: 500
+        width: 333.33334
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,20 +144,41 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 62daef943ecdf47c0800000000000000
-      internalID: -4084803468244636378
+      spriteID: 31b9653358499ddc0800000000000000
+      internalID: -3613693926175237357
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bruh2_3
+      name: bruhh_2
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 500
+        width: 333.33334
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d73464cca596fc850800000000000000
+      internalID: 6399449434211894141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bruhh_3
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 166.66667
-        height: 250
+        width: 333.33334
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,20 +186,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b32de1729dd379b0800000000000000
-      internalID: -5083475933324827721
+      spriteID: 2250c901d855266d0800000000000000
+      internalID: -2998740337517918942
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bruh2_4
+      name: bruhh_4
       rect:
         serializedVersion: 2
-        x: 166
+        x: 333
         y: 0
-        width: 166.66667
-        height: 250
+        width: 333.33334
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -207,20 +207,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 900cdea6de1d42a60800000000000000
-      internalID: 7648468884813365257
+      spriteID: 0d787059ac07e1dc0800000000000000
+      internalID: -3666369031247001648
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bruh2_5
+      name: bruhh_5
       rect:
         serializedVersion: 2
-        x: 332
+        x: 666
         y: 0
-        width: 166.66667
-        height: 250
+        width: 333.33334
+        height: 500
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,8 +228,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d7365a83cc44667b0800000000000000
-      internalID: -5231418273229872259
+      spriteID: 4f2906d6b06178c60800000000000000
+      internalID: 7820243516287652596
       vertices: []
       indices: 
       edges: []
