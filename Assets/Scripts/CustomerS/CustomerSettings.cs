@@ -10,4 +10,8 @@ public sealed class CustomerSettings : ScriptableObject
     public float itemGrabDuration = 1;
     public AnimationCurve grabCurve = null;
     public AnimationCurve shrinkCurve = null;
+
+    public float minWaitDuration = 5, maxWaitDuration = 10;
+    public Color angryColor = Color.red;
+    public AnimationCurve angryColorCurve = null;
 }
