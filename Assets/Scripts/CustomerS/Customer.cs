@@ -44,6 +44,8 @@ public sealed class Customer : Multiton<Customer>
 
     private IEnumerator OnSpotUpdated()
     {
+        _renderer.flipX = GameManager.Instance.Random.Next(0, 2) == 0;
+
         _renderer.color = Color.white;
         _renderer.sprite = _defaultSprite;
 
@@ -187,10 +189,7 @@ public sealed class Customer : Multiton<Customer>
     private IEnumerator OnMissingItemReceived()
     {
         _renderer.sprite = _foundSprite;
-
-        var wantedItems = CustomerManager.Instance.wantedItems;
-        wantedItems.Remove(_wantedItem);
-
+        
         _wantedItemRenderer.gameObject.SetActive(false);
         if (!_foundItem)
             yield break;
@@ -262,6 +261,7 @@ public sealed class Customer : Multiton<Customer>
             return;
 
         _foundItem = item;
+        wanted.Remove(_wantedItem);
         wanted.Remove(_foundItem);
     }
 
