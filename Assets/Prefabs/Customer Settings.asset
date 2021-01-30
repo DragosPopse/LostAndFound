@@ -160,6 +160,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  stealChance: 0.5
+  stealChance: 0
   stealInterval: 4
   stealLerp: 0.001
