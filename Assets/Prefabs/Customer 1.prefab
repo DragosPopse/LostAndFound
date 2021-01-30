@@ -133,6 +133,8 @@ MonoBehaviour:
   _defaultSprite: {fileID: 3878618018002631703, guid: 2fac6e499020cd54a8032cbb92e60647, type: 3}
   _waitingSprite: {fileID: 2450723695873335227, guid: 2fac6e499020cd54a8032cbb92e60647, type: 3}
   _foundSprite: {fileID: -9128501274826510683, guid: 2fac6e499020cd54a8032cbb92e60647, type: 3}
+  _angrySprite: {fileID: -1969296927823876177, guid: 2fac6e499020cd54a8032cbb92e60647, type: 3}
+  _gaspSprite: {fileID: 3878618018002631703, guid: 2fac6e499020cd54a8032cbb92e60647, type: 3}
 --- !u!212 &5359525798045692068
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -208,5 +210,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2, y: 2.5}
+  m_Size: {x: 1, y: 2.5}
   m_EdgeRadius: 0

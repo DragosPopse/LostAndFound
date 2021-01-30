@@ -23,7 +23,9 @@ public sealed class Customer : Multiton<Customer>
     [SerializeField] private Sprite 
         _defaultSprite = null, 
         _waitingSprite = null, 
-        _foundSprite = null;
+        _foundSprite = null,
+        _angrySprite = null,
+        _gaspSprite = null;
 
     private SpriteRenderer _renderer = null;
 
@@ -32,6 +34,8 @@ public sealed class Customer : Multiton<Customer>
 
     private bool _waiting = false;
     private LostItem _foundItem = null;
+
+    private bool _animationLocked = false;
 
     private void Awake()
     {
@@ -91,8 +95,6 @@ public sealed class Customer : Multiton<Customer>
 
     private IEnumerator AskForMissingItem()
     {
-        _renderer.sprite = _waitingSprite;
-
         var items = LostItem.Instances;
         var wantedItems = CustomerManager.Instance.wantedItems;
 
@@ -149,6 +151,10 @@ public sealed class Customer : Multiton<Customer>
 
         while (((remaining -= Time.deltaTime) > 0 || stealing) && !_foundItem)
         {
+            // Update animation.
+            if(!_animationLocked)
+                _renderer.sprite = _waitingSprite;
+
             float lerp = 1f - remaining / duration;
             float eval = _settings.angryColorCurve.Evaluate(lerp);
 
@@ -189,8 +195,6 @@ public sealed class Customer : Multiton<Customer>
         if (!_foundItem)
             yield break;
         
-        wantedItems.Remove(_foundItem);
-
         _foundItem.enabled = false;
         _foundItem.transform.SetParent(transform);
 
@@ -234,12 +238,34 @@ public sealed class Customer : Multiton<Customer>
     {
         if (!_waiting)
             return;
+        _animationLocked = true;
 
         LostItem item = collision.gameObject.GetComponent<LostItem>();
         if (!item)
             return;
 
-        if (!item.IsSelected && (item == _wantedItem || item == _stealItem)) 
-            _foundItem = item;
+        var wanted = CustomerManager.Instance.wantedItems;
+        if (!wanted.Contains(item))
+            return;
+
+        if (item != _wantedItem)
+        {
+            _renderer.sprite = _angrySprite;
+            if(item != _stealItem)
+                return;
+        }
+        else
+            _renderer.sprite = _gaspSprite;
+
+        if (item.IsSelected)
+            return;
+
+        _foundItem = item;
+        wanted.Remove(_foundItem);
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        _animationLocked = false;
     }
 }
