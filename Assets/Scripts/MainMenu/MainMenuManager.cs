@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MainMenuManager : utility.Singleton<MainMenuManager>
 {
+    [SerializeField] private GameObject _playButton;
+
     [SerializeField] 
     private int _panelPartialAlpha;
 
@@ -59,5 +61,6 @@ public class MainMenuManager : utility.Singleton<MainMenuManager>
     {
         _fence.PlayLiftAnimation();
         _titleText.PlayAnimation();
+        _playButton.SetActive(false);
     }
 }

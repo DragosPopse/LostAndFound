@@ -29,4 +29,7 @@ public class BlinkPanel : utility.Singleton<BlinkPanel>
             yield return null;
         }
     }
+
+
+
 }
