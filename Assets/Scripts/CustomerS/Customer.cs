@@ -238,6 +238,8 @@ public sealed class Customer : Multiton<Customer>
             
             yield return null;
         }
+
+        trans.localPosition = end;
     }
 
     private void OnDestroy()
