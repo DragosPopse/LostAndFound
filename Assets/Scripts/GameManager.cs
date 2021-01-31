@@ -17,10 +17,19 @@ public sealed class GameManager : Singleton<GameManager>
     [SerializeField, Tooltip("Leave empty to generate random seed")] 
     private string _seed = "";
 
+    AudioSource _audio;
+
     private Random _random = null;
     private int _currentLives = 0;
 
+
     public static int currentScore = 0;
+
+    private void Start()
+    {
+        _audio = GetComponent<AudioSource>();
+    }
+
 
     public State GameState
     {
@@ -35,6 +44,15 @@ public sealed class GameManager : Singleton<GameManager>
             UpdateScoreText();
 
             _state = value;
+
+            if (_state == State.Game)
+            {
+                _audio.Play();
+                _audio.mute = false;
+            } else
+            {
+                _audio.mute = true;
+            }
         }
     }
 
