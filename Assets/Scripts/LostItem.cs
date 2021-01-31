@@ -117,4 +117,10 @@ public class LostItem : Multiton<LostItem>
         _currentSelect = null;
         _newPosition += (Vector3.Lerp(transform.position, _newPosition, 0.05f) - transform.position) * 15;
     }
+
+
+    private void OnDestroy()
+    {
+        ItemSpawner.Instance.PoolItem(this);
+    }
 }
