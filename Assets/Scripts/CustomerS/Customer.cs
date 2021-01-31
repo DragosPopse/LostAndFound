@@ -244,6 +244,9 @@ public sealed class Customer : Multiton<Customer>
 
     private void OnDestroy()
     {
+        if(!_foundItem)
+            GameManager.Instance.OnDamageTaken();
+
         var manager = CustomerManager.Instance;
         _spot.customer = null;
         manager.OnCustomerDestroyed(prefabIndex);
