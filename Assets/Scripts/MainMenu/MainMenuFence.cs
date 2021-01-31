@@ -16,6 +16,9 @@ public class MainMenuFence : utility.Singleton<MainMenuFence>
     [SerializeField]
     private float _shakeDuration;
 
+    [SerializeField]
+    private float _waitDuration;
+
     private Vector3 _startScale;
 
 
@@ -24,6 +27,7 @@ public class MainMenuFence : utility.Singleton<MainMenuFence>
     {
         _startScale = transform.localScale;
     }
+
 
 
     public void PlayLiftAnimation()
@@ -44,6 +48,7 @@ public class MainMenuFence : utility.Singleton<MainMenuFence>
 
         yield return StartCoroutine(Co_GoTowards(firstPosition, _shakeDuration));
         yield return StartCoroutine(Co_GoTowards(secondPosition, _shakeDuration));
+        yield return new WaitForSeconds(_waitDuration);
         yield return StartCoroutine(Co_GoTowards(startPosition, _shakeDuration));
 
         yield return StartCoroutine(Co_ScaleAnimation());
