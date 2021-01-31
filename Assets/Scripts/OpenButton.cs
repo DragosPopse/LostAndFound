@@ -23,7 +23,7 @@ public sealed class OpenButton : MonoBehaviour
         _renderer.sprite = _downSprite;
     }
 
-    private void OnMouseEnter()
+    private void OnMouseDown()
     {
         if (!enabled)
             return;
