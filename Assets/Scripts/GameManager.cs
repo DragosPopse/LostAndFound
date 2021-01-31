@@ -69,6 +69,6 @@ public sealed class GameManager : Singleton<GameManager>
     private void OnGameOver()
     {
         // Do Whatever.
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 }
