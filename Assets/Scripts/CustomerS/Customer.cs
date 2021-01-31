@@ -216,6 +216,7 @@ public sealed class Customer : Multiton<Customer>
             yield break;
         }
 
+        GameManager.Instance.OnCustomerHelped();
         _renderer.sprite = _foundSprite;
 
         _foundItem.enabled = false;

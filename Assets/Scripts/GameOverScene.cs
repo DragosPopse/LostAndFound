@@ -1,12 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameOverScene : MonoBehaviour
 {
+    [SerializeField] private Text _scoreText = null;
+
     void Start()
     {
+        _scoreText.text = $"Score: {GameManager.currentScore}";
         StartCoroutine(ReloadLevel());
     }
 

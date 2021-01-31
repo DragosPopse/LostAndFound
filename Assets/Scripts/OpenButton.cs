@@ -18,10 +18,13 @@ public sealed class OpenButton : MonoBehaviour
         _renderer = GetComponent<SpriteRenderer>();
     }
 
-    private void OnMouseDown()
+    private void OnMouseOver()
     {
         _renderer.sprite = _downSprite;
+    }
 
+    private void OnMouseDown()
+    {
         if (!enabled)
             return;
 
@@ -32,7 +35,7 @@ public sealed class OpenButton : MonoBehaviour
         enabled = false;
     }
 
-    private void OnMouseUp()
+    private void OnMouseExit()
     {
         _renderer.sprite = _upSprite;
     }
