@@ -270,19 +270,15 @@ public sealed class Customer : Multiton<Customer>
         if (!item)
             return;
 
+        _renderer.sprite = _angrySprite;
         var wanted = CustomerManager.Instance.wantedItems;
+
         if (!wanted.Contains(item))
             return;
+        if (item != _wantedItem && item != _stealItem)
+            return;
 
-        if (item != _wantedItem)
-        {
-            _renderer.sprite = _angrySprite;
-            if(item != _stealItem)
-                return;
-        }
-        else
-            _renderer.sprite = _gaspSprite;
-
+        _renderer.sprite = _gaspSprite;
         if (item.IsSelected)
             return;
 
