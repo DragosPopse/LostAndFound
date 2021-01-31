@@ -36,12 +36,17 @@ public sealed class Customer : Multiton<Customer>
     private bool _waiting = false;
     private LostItem _foundItem = null;
 
+    private AudioSource _audio;
+
     private int _animationLocked = 0;
+
+    private bool _mouseOver = false;
 
     private void Awake()
     {
         _renderer = GetComponent<SpriteRenderer>();
         _animator = GetComponent<Animator>();
+        _audio = GetComponent<AudioSource>();
     }
 
     private IEnumerator OnSpotUpdated()
@@ -216,6 +221,7 @@ public sealed class Customer : Multiton<Customer>
             yield break;
         }
 
+        _audio.Play();
         GameManager.Instance.OnCustomerHelped();
         _renderer.sprite = _foundSprite;
 
@@ -297,6 +303,7 @@ public sealed class Customer : Multiton<Customer>
             return;
 
         _foundItem = item;
+
         wanted.Remove(_wantedItem);
     }
 

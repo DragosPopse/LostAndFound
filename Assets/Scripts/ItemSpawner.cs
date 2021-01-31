@@ -9,6 +9,7 @@ public class ItemSpawner : utility.Singleton<ItemSpawner>
     [SerializeField]
     private Vector3 SpawnPosition;
 
+    private AudioSource _audio;
 
     private List<GameObject> _itemPool = new List<GameObject>();
     private List<GameObject> _usedItems = new List<GameObject>();
@@ -20,6 +21,8 @@ public class ItemSpawner : utility.Singleton<ItemSpawner>
         {
             _itemPool.Add(obj);
         }
+
+        _audio = GetComponent<AudioSource>();
     }
 
 
@@ -37,6 +40,8 @@ public class ItemSpawner : utility.Singleton<ItemSpawner>
         GameObject obj = Instantiate(_itemPool[index]);
         _usedItems.Add(_itemPool[index]);
         _itemPool.Remove(_itemPool[index]);
+
+        _audio.Play();
 
         obj.transform.position = transform.position;
         obj.GetComponent<LostItem>().NewPosition = targetPosition;

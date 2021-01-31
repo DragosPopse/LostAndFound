@@ -77,7 +77,6 @@ public class LostItem : Multiton<LostItem>
 
     private void Update()
     {
-        Debug.Log("pos: " + _newPosition);
         if (_mouseDown)
         {
             var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
