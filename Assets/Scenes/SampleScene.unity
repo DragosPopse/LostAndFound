@@ -453,7 +453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6563460430025776239, guid: f2200de9e20af1f4eabb443c2d24e7d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6563460431032443148, guid: f2200de9e20af1f4eabb443c2d24e7d7, type: 3}
       propertyPath: _playButton
