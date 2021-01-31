@@ -66,7 +66,6 @@ public class LostItem : Multiton<LostItem>
 
     private float _lerpFactor;
 
-
     private void Start()
     {
         if (_newPosition == Vector3.zero) { _newPosition = transform.position; }
@@ -100,6 +99,9 @@ public class LostItem : Multiton<LostItem>
 
     private void OnMouseDown()
     {
+        if (!enabled)
+            return;
+
         Debug.Log(_debugName);
         _mouseDown = true;
         var mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
