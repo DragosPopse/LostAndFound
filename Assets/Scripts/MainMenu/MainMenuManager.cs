@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainMenuManager : utility.Singleton<MainMenuManager>
 {
-    [SerializeField] private GameObject _playButton;
+
+    [SerializeField]
+    private GameObject _playButton;
 
     [SerializeField] 
     private int _panelPartialAlpha;
@@ -26,7 +29,7 @@ public class MainMenuManager : utility.Singleton<MainMenuManager>
         _fence = MainMenuFence.Instance;
         _titleText = TitleText.Instance;
         _panel = BlinkPanel.Instance;
-
+        
         StartCoroutine(Entry());
     }
 
