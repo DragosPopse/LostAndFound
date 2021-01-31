@@ -60,7 +60,7 @@ public class ItemSpawner : utility.Singleton<ItemSpawner>
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (GameManager.Instance.GameState == GameManager.State.Game)
         {
             SpawnRandomItem();
         }

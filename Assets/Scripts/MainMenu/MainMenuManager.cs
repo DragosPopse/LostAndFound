@@ -17,8 +17,12 @@ public sealed class MainMenuManager : utility.Singleton<MainMenuManager>
     private BlinkPanel _panel;
 
 
+
+
     private void Start()
     {
+        GameManager.Instance.GameState = GameManager.State.Menu;
+
         _fence = MainMenuFence.Instance;
         _titleText = TitleText.Instance;
         _panel = BlinkPanel.Instance;
@@ -57,5 +61,6 @@ public sealed class MainMenuManager : utility.Singleton<MainMenuManager>
     {
         _fence.PlayLiftAnimation();
         _titleText.PlayAnimation();
+        GameManager.Instance.GameState = GameManager.State.Game;
     }
 }
