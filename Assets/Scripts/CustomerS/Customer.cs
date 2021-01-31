@@ -28,6 +28,7 @@ public sealed class Customer : Multiton<Customer>
         _gaspSprite = null;
 
     private SpriteRenderer _renderer = null;
+    private Animator _animator = null;
 
     private CustomerManager.CustomerSpot _spot = null;
     private LostItem _wantedItem = null, _stealItem = null;
@@ -40,6 +41,7 @@ public sealed class Customer : Multiton<Customer>
     private void Awake()
     {
         _renderer = GetComponent<SpriteRenderer>();
+        _animator = GetComponent<Animator>();
     }
 
     private IEnumerator OnSpotUpdated()
@@ -101,7 +103,13 @@ public sealed class Customer : Multiton<Customer>
         var wantedItems = CustomerManager.Instance.wantedItems;
 
         while (items.Count - wantedItems.Count == 0)
+        {
+            if (_animator)
+                _animator.enabled = true;
             yield return null;
+        }
+        if (_animator)
+            _animator.enabled = false;
 
         int max = items.Count;
         LostItem item = null;
