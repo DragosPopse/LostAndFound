@@ -1,14 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class MainMenuManager : utility.Singleton<MainMenuManager>
+public sealed class MainMenuManager : utility.Singleton<MainMenuManager>
 {
-
-    [SerializeField]
-    private GameObject _playButton;
-
     [SerializeField] 
     private int _panelPartialAlpha;
 
@@ -17,7 +11,6 @@ public class MainMenuManager : utility.Singleton<MainMenuManager>
 
     [SerializeField]
     private AnimationCurve[] _curves;
-
 
     private MainMenuFence _fence;
     private TitleText _titleText;
@@ -64,6 +57,5 @@ public class MainMenuManager : utility.Singleton<MainMenuManager>
     {
         _fence.PlayLiftAnimation();
         _titleText.PlayAnimation();
-        _playButton.SetActive(false);
     }
 }
